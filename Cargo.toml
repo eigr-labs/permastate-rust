@@ -1,9 +1,43 @@
 [package]
 name = "eigr"
 version = "0.1.0"
-authors = ["Weslei Juan Moser Pereira <wesleimsr@gmail.com>"]
+description = "Support for implementing Eigr/CloudState Protocol functions"
+keywords = [
+    "eigr",
+    "serverless",
+    "cloudstate",
+    "event-sourcing",
+    "crdt",
+    "stateful",
+    "stateless"
+  ]
+homepage = "https://eigr.io/"
+documentation = "https://eigr.io/docs/"
+license = "Apache-2.0"
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+# Compile protos
+#build = "build.rs"
 
 [dependencies]
+actix = "0.12.0"
+tonic = "0.5"
+prost = "0.8"
+prost-types  = "0.8"
+tokio = { version = "1.0", features = ["rt-multi-thread", "time", "fs", "macros", "net"] }
+tokio-stream = { version =  "0.1", features = ["net"] }
+async-stream = "0.3"
+futures      = { version = "0.3", default-features = false, features = ["alloc"] }
+tower        = { version = "0.4" }
+http         = "0.2"
+http-body    = "0.4.2"
+bytes        = "1"
+rustc_version = "0.4.0"
+log           = "0.4.14"
+log4rs        = "1.0.0"
+config        = "0.11.0"
+
+[build-dependencies]
+tonic-build = { version = "0.5", features = ["prost", "compression"] } 
+protoc-rust = "2.24.1"
+#protobuf-codegen-pure = "2.3"

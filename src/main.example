@@ -1,0 +1,24 @@
+extern crate eigr;
+extern crate log;
+extern crate log4rs;
+
+use eigr::permastate::{EntityService, Permastate};
+use log::info;
+
+fn main() {
+    // Cloudstate depends of log4rs to print messages
+    log4rs::init_file("config/log4rs.yml", Default::default()).unwrap();
+    info!("Starting Permastate Server...");
+
+    let service = EntityService::new()
+        .persistence_id("shopping-cart".to_string())
+        .snapshot(1)
+        .event_sourced();
+
+    Permastate::new()
+        .register_entity_service(
+            String::from("com.example.shoppingcart.ShoppingCart"),
+            service,
+        )
+        .start();
+}
